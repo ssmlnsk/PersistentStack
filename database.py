@@ -1,0 +1,65 @@
+from sqlite3 import connect
+import json
+
+class Database():
+    """
+    Класс с функциями для взаимодействия с базой данных.
+    """
+    def __init__(self, name):
+        """
+        Создание базы данных.
+        :param name: имя базы данных
+        """
+        self.conn = connect(f"{name}")
+        cursor = self.conn.cursor()
+        cursor.execute("CREATE TABLE IF NOT EXISTS versions (id INTEGER PRIMARY KEY AUTOINCREMENT, version TEXT)")
+        self.conn.commit()
+        cursor.close()
+
+    def Insert_in_Table(self, data):
+        """
+        Функция для вставки данных в базу данных.
+        :param data: данные, которые вставляются в базу данных
+        :return: None
+        """
+        cursor = self.conn.cursor()
+        cursor.execute(f"""INSERT INTO versions (version) VALUES ('{data}')""")
+        self.conn.commit()
+        cursor.close()
+
+    def get_lastVersion(self):
+        """
+        Функция получения последней версии стека.
+        :return: None
+        """
+        cursor = self.conn.cursor()
+        cursor.execute("SELECT version FROM versions WHERE id = (SELECT MAX(id) FROM versions);")
+        last_version_json = json.dumps(cursor.fetchone())
+        last_version = json.loads(last_version_json)
+        self.conn.commit()
+        cursor.close()
+        return last_version
+
+    def get_id(self):
+        """
+        Функция получения списка id версий, хранящихся в базе данных.
+        :return: None
+        """
+        cursor = self.conn.cursor()
+        list_id = [str(i)[1:-2] for i in cursor.execute("SELECT id FROM versions")]
+        cursor.close()
+        return list_id
+
+    def select(self, id):
+        """
+        Функция получения выбранной версии стека.
+        :param id: айди выбранной версии
+        :return: None
+        """
+        cursor = self.conn.cursor()
+        cursor.execute(f"SELECT version FROM versions WHERE id = ('{id}')")
+        select_json = json.dumps(cursor.fetchone())
+        select = json.loads(select_json)
+        self.conn.commit()
+        cursor.close()
+        return select
