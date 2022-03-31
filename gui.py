@@ -1,7 +1,12 @@
 import sys
 from PyQt5 import uic, QtWidgets
-from PyQt5.QtWidgets import QMainWindow
+from PyQt5.QtWidgets import QMainWindow, QMessageBox
 from facade import Facade
+
+import logging
+
+logging.basicConfig(level=logging.INFO)
+# logging.disable(logging.INFO)
 
 class MainWindow(QMainWindow):
     """
@@ -18,9 +23,11 @@ class MainWindow(QMainWindow):
         self.strin = '123'
         self.btn_open_add.clicked.connect(lambda: self.add_elem())
         self.btn_delete.clicked.connect(lambda: self.delete_elem())
+        self.btn_delete_all.clicked.connect(lambda: self.DialogDel())
         self.comboBox.addItems(self.facade.get_id())
         self.build()
         self.comboBox.currentIndexChanged.connect(lambda: self.select())
+        logging.log(logging.INFO, 'Приложение запущено')
 
     def select(self):
         """
@@ -30,6 +37,7 @@ class MainWindow(QMainWindow):
         id = self.comboBox.currentText()
         self.list = str(self.facade.get_select(id))
         self.build_select()
+        logging.log(logging.INFO, 'Выбрана версия ' + id)
 
     def delete_elem(self):
         """
@@ -51,14 +59,41 @@ class MainWindow(QMainWindow):
 
         self.build_CB()
         self.build()
+        logging.log(logging.INFO, 'Последний элемент удалён')
 
     def add_elem(self):
         """
         Функция открытия окна добавления элемента.
         :return: None
         """
-        self.ui1 = InsertWidget(self.facade, self)
-        self.ui1.show()
+        self.ui = InsertWidget(self.facade, self)
+        self.ui.show()
+        logging.log(logging.INFO, 'Открыто окно "Добавление элемента"')
+
+    def delete_all(self, button):
+        if button.text() == "OK":
+            self.facade.delete_all()
+            self.build_CB()
+            self.build()
+            logging.log(logging.INFO, 'данные удалены')
+        else:
+            logging.log(logging.INFO, 'данные не удалены')
+
+    def DialogDel(self):
+        """
+        Создание MessageBox при нажатии кнопки "Удалить всё".
+        :return: None
+        """
+        self.messagebox_del_all = QMessageBox(self)
+        self.messagebox_del_all.setWindowTitle("Удаление данных")
+        self.messagebox_del_all.setText("Вы уверены, что хотите удалить все данные?")
+        self.messagebox_del_all.setInformativeText("После сохранения данные будут утеряны!")
+        self.messagebox_del_all.setIcon(QMessageBox.Question)
+        self.messagebox_del_all.setStandardButtons(QMessageBox.Cancel | QMessageBox.Ok)
+
+        self.messagebox_del_all.buttonClicked.connect(self.delete_all)
+        self.messagebox_del_all.show()
+        logging.log(logging.INFO, 'Открыто диалоговое окно "Удаление данных"')
 
     def build_select(self):
         """
@@ -73,6 +108,8 @@ class MainWindow(QMainWindow):
         if self.list != None:
             self.listWidget.addItems(self.list)
 
+        logging.log(logging.INFO, 'ListWidget обновлён')
+
     def build(self):
         """
         Функция построения последней версии стека в listWidget.
@@ -86,6 +123,8 @@ class MainWindow(QMainWindow):
         if self.list != None:
             self.listWidget.addItems(self.list)
 
+        logging.log(logging.INFO, 'ListWidget обновлён')
+
     def build_CB(self):
         """
         Функция передачи списка id версий, хранящихся в базе данных.
@@ -95,6 +134,9 @@ class MainWindow(QMainWindow):
         self.comboBox.clear()
         if self.comboBox != None:
             self.comboBox.addItems(self.list_id)
+        logging.log(logging.INFO, 'ComboBox обновлён')
+
+
 
 class InsertWidget(QtWidgets.QWidget):
     """
@@ -132,10 +174,13 @@ class InsertWidget(QtWidgets.QWidget):
         if self.current != None:
             self.link.facade.push(self.current, self.data)
 
-        print("Вы ввели: ", self.data)
+        # print("Вы ввели: ", self.data)
         self.label_info.setText(f"Вы ввели: {self.data}")
         self.link.build_CB()
         self.link.build()
+        logging.log(logging.INFO, f"Добавлен элемент: {self.data}")
+
+
 
 class Builder:
     """

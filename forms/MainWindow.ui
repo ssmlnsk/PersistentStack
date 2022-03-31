@@ -29,7 +29,7 @@
    </size>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string>Персистентный стек</string>
   </property>
   <widget class="QPushButton" name="btn_open_add">
    <property name="geometry">
@@ -60,30 +60,17 @@
     <string>Удалить</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_save">
+  <widget class="QPushButton" name="btn_delete_all">
    <property name="geometry">
     <rect>
      <x>130</x>
      <y>400</y>
-     <width>181</width>
+     <width>381</width>
      <height>31</height>
     </rect>
    </property>
    <property name="text">
-    <string>Сохранить</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="pushButton_delete_version">
-   <property name="geometry">
-    <rect>
-     <x>330</x>
-     <y>400</y>
-     <width>181</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Удалить</string>
+    <string>Удалить всё</string>
    </property>
   </widget>
   <widget class="QLabel" name="label">

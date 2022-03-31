@@ -60,7 +60,7 @@ class Facade:
             if nums != ['']:
                 for num in nums:
                     version.append(int(num))
-        print('vers', version)
+        # print('vers', version)
         return version
 
     def get_id(self):
@@ -84,3 +84,10 @@ class Facade:
                 for num in nums:
                     select.append(int(num))
         return select
+
+    def delete_all(self):
+        vers = self.get()
+        if vers is not None:
+            self.DB.delete_all()
+        else:
+            print("Стек уже пустой!")

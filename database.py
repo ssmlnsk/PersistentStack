@@ -63,3 +63,16 @@ class Database():
         self.conn.commit()
         cursor.close()
         return select
+
+    def delete_all(self):
+        """
+        Функция удаления версий.
+        :return: None
+        """
+        cursor = self.conn.cursor()
+        cursor.execute("DELETE FROM versions")
+        cursor.execute("DELETE FROM sqlite_sequence WHERE name = 'versions'")
+        cursor.execute("UPDATE sqlite_sequence SET seq = 10 WHERE name = 'versions'")
+        self.conn.commit()
+        print("Данные удалены!")
+        cursor.close()

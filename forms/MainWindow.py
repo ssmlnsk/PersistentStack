@@ -29,12 +29,9 @@ class Ui_Form(object):
         self.btn_delete = QtWidgets.QPushButton(Form)
         self.btn_delete.setGeometry(QtCore.QRect(10, 120, 111, 31))
         self.btn_delete.setObjectName("btn_delete")
-        self.pushButton_save = QtWidgets.QPushButton(Form)
-        self.pushButton_save.setGeometry(QtCore.QRect(130, 400, 181, 31))
-        self.pushButton_save.setObjectName("pushButton_save")
-        self.pushButton_delete_version = QtWidgets.QPushButton(Form)
-        self.pushButton_delete_version.setGeometry(QtCore.QRect(330, 400, 181, 31))
-        self.pushButton_delete_version.setObjectName("pushButton_delete_version")
+        self.btn_delete_all = QtWidgets.QPushButton(Form)
+        self.btn_delete_all.setGeometry(QtCore.QRect(130, 400, 381, 31))
+        self.btn_delete_all.setObjectName("btn_delete_all")
         self.label = QtWidgets.QLabel(Form)
         self.label.setGeometry(QtCore.QRect(10, 20, 111, 16))
         self.label.setObjectName("label")
@@ -50,11 +47,10 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Form"))
+        Form.setWindowTitle(_translate("Form", "Персистентный стек"))
         self.btn_open_add.setText(_translate("Form", "Добавить"))
         self.btn_delete.setText(_translate("Form", "Удалить"))
-        self.pushButton_save.setText(_translate("Form", "Сохранить"))
-        self.pushButton_delete_version.setText(_translate("Form", "Удалить"))
+        self.btn_delete_all.setText(_translate("Form", "Удалить всё"))
         self.label.setText(_translate("Form", "Выбор версии:"))
 
 
