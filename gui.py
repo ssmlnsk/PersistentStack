@@ -75,9 +75,9 @@ class MainWindow(QMainWindow):
             self.facade.delete_all()
             self.build_CB()
             self.build()
-            logging.log(logging.INFO, 'данные удалены')
+            logging.log(logging.INFO, 'Данные удалены')
         else:
-            logging.log(logging.INFO, 'данные не удалены')
+            logging.log(logging.INFO, 'Данные не удалены')
 
     def DialogDel(self):
         """

@@ -44,8 +44,3 @@ class FunctionalTest(TestCase):
         QTest.mouseClick(btn_pop, QtCore.Qt.MouseButton.LeftButton)
 
 
-
-if __name__ == '__main__':
-    pass
-
-
