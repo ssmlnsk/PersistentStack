@@ -1,4 +1,7 @@
 import json
+import logging
+
+logging.basicConfig(level=logging.INFO)
 
 class Stack():
     """
@@ -23,7 +26,7 @@ class Stack():
         """
         self.stack = current
         self.stack.append(item)
-        self.save_version()
+        # self.save_version()
         self.json_data = json.dumps(self.stack, indent=4)
 
     def pop(self, current):
@@ -34,26 +37,26 @@ class Stack():
         """
         self.stack = current
         if len(self.stack) == 0:
-            return None
+            return self
         else:
             remove = self.stack.pop()
-            self.save_version()
+            # self.save_version()
             self.json_data = json.dumps(self.stack, indent=4)
             return remove
 
-    def save_version(self):
-        """
-        Функция сохранения версии стека.
-        :return: None
-        """
-        self.version.append(self.stack.copy())
-
-    def save_version_to_db(self):
-        """
-        Функция сохранения версии стека в базу данных.
-        :return: None
-        """
-        self.json_data = json.dumps(self.version, indent=4)
+    # def save_version(self):
+    #     """
+    #     Функция сохранения версии стека.
+    #     :return: None
+    #     """
+    #     self.version.append(self.stack.copy())
+    #
+    # def save_version_to_db(self):
+    #     """
+    #     Функция сохранения версии стека в базу данных.
+    #     :return: None
+    #     """
+    #     self.json_data = json.dumps(self.version, indent=4)
 
     def get_json_data(self):
         """

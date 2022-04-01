@@ -23,7 +23,7 @@ class MainWindow(QMainWindow):
         self.strin = '123'
         self.btn_open_add.clicked.connect(lambda: self.add_elem())
         self.btn_delete.clicked.connect(lambda: self.delete_elem())
-        self.btn_delete_all.clicked.connect(lambda: self.DialogDel())
+        self.btn_delete_all.clicked.connect(lambda: self.DialogDelAll())
         self.comboBox.addItems(self.facade.get_id())
         self.build()
         self.comboBox.currentIndexChanged.connect(lambda: self.select())
@@ -38,6 +38,7 @@ class MainWindow(QMainWindow):
         self.list = str(self.facade.get_select(id))
         self.build_select()
         logging.log(logging.INFO, 'Выбрана версия ' + id)
+        self.label_2.clear()
 
     def delete_elem(self):
         """
@@ -55,11 +56,14 @@ class MainWindow(QMainWindow):
             self.current = [self.current]
 
         if self.current != None:
-            self.facade.pop(self.current)
-
-        self.build_CB()
-        self.build()
-        logging.log(logging.INFO, 'Последний элемент удалён')
+            if self.current == []:
+                self.DialogDel2()
+                logging.log(logging.INFO, 'Стек уже пуст!')
+            else:
+                self.facade.pop(self.current)
+                self.build_CB()
+                self.build()
+                logging.log(logging.INFO, 'Последний элемент удалён!')
 
     def add_elem(self):
         """
@@ -79,7 +83,7 @@ class MainWindow(QMainWindow):
         else:
             logging.log(logging.INFO, 'Данные не удалены')
 
-    def DialogDel(self):
+    def DialogDelAll(self):
         """
         Создание MessageBox при нажатии кнопки "Удалить всё".
         :return: None
@@ -94,6 +98,20 @@ class MainWindow(QMainWindow):
         self.messagebox_del_all.buttonClicked.connect(self.delete_all)
         self.messagebox_del_all.show()
         logging.log(logging.INFO, 'Открыто диалоговое окно "Удаление данных"')
+
+    def DialogDel(self):
+        """
+        Создание MessageBox при нажатии кнопки "Удалить".
+        :return: None
+        """
+        self.messagebox_del_all = QMessageBox(self)
+        self.messagebox_del_all.setWindowTitle("Удаление элемента'")
+        self.messagebox_del_all.setText("Стек уже пустой!")
+        self.messagebox_del_all.setIcon(QMessageBox.Warning)
+        self.messagebox_del_all.setStandardButtons(QMessageBox.Ok)
+
+        self.messagebox_del_all.show()
+        logging.log(logging.INFO, 'Открыто диалоговое окно "Удаление элемента"')
 
     def build_select(self):
         """

@@ -14,10 +14,13 @@ class Facade:
 
         list = []
         if self.DB.get_lastVersion() != None:
-            nums = self.DB.get_lastVersion()[0][1:-1].split(',')
-            if nums != ['']:
-                for num in nums:
-                    list.append(int(num))
+            if self.DB.get_lastVersion() == 'None':
+                list = []
+            else:
+                nums = self.DB.get_lastVersion()[0][1:-1].split(',')
+                if nums != ['']:
+                    for num in nums:
+                        list.append(int(num))
 
         self.S = Stack(stack=list)
 

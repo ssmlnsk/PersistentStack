@@ -22,6 +22,8 @@ class Database():
         :param data: данные, которые вставляются в базу данных
         :return: None
         """
+        if data == 'None':
+            data = None
         cursor = self.conn.cursor()
         cursor.execute(f"""INSERT INTO versions (version) VALUES ('{data}')""")
         self.conn.commit()
