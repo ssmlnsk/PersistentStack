@@ -86,6 +86,10 @@ class Facade:
         return select
 
     def delete_all(self):
+        """
+        Функция, удаляющая все данные.
+        :return:
+        """
         vers = self.get()
         if vers is not None:
             self.DB.delete_all()
