@@ -5,7 +5,7 @@ class Facade:
     """
     Класс фасада
     """
-    def __init__(self, name='Database.db'):
+    def __init__(self, name='Stack_DB.db'):
         """
         Создание объекта базы данных, структуры данных.
         :param name: имя базы данных

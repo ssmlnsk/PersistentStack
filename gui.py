@@ -38,7 +38,6 @@ class MainWindow(QMainWindow):
         self.list = str(self.facade.get_select(id))
         self.build_select()
         logging.log(logging.INFO, 'Выбрана версия ' + id)
-        self.label_2.clear()
 
     def delete_elem(self):
         """
@@ -57,7 +56,7 @@ class MainWindow(QMainWindow):
 
         if self.current != None:
             if self.current == []:
-                self.DialogDel2()
+                self.DialogDel()
                 logging.log(logging.INFO, 'Стек уже пуст!')
             else:
                 self.facade.pop(self.current)
