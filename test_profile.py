@@ -1,20 +1,18 @@
-import cProfile
-
-from stack import Stack
 import random
 
-import logging
-logging.disable(logging.INFO)
+from stack import Stack
 
-def a():
-    stack = Stack()
-    inumbers = list(range(1000000))
-    jnumbers = list(range(1000000))
-    random.shuffle(inumbers)
-    random.shuffle(jnumbers)
-    for i in inumbers:
-        stack.push(jnumbers, i)
+stack = Stack()
+inumbers = list(range(10000))
+a = list(range(10000))
+jnumbers = []
+random.shuffle(inumbers)
+for i in inumbers:
+    stack.push(jnumbers, i)
 
-    random.shuffle(inumbers)
-    for i in inumbers:
-        stack = stack.pop(i)
+for i in a:
+    stack.pop(jnumbers)
+
+if __name__ == '__main__':
+    pass
+

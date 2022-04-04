@@ -1,17 +1,15 @@
 import json
-import logging
 
-logging.basicConfig(level=logging.INFO)
 
-class Stack():
+class Stack:
     """
     Структура данных персистентный стек.
     """
     def __init__(self, json_data=None, stack=None):
         """
-
-        :param json_data:
-        :param stack:
+        Структура данных персистентный стек.
+        :param json_data: версия стека в формате json
+        :param stack: стек
         """
         self.stack = stack
         self.version = []
@@ -50,13 +48,6 @@ class Stack():
         :return: None
         """
         self.version.append(self.stack.copy())
-    #
-    # def save_version_to_db(self):
-    #     """
-    #     Функция сохранения версии стека в базу данных.
-    #     :return: None
-    #     """
-    #     self.json_data = json.dumps(self.version, indent=4)
 
     def get_json_data(self):
         """

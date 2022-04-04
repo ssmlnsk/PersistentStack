@@ -680,9 +680,6 @@
   ('_py_abc',
    'C:\\Users\\ssmlnsk\\AppData\\Local\\Programs\\Python\\Python39\\lib\\_py_abc.py',
    'PYMODULE'),
-  ('logging',
-   'C:\\Users\\ssmlnsk\\AppData\\Local\\Programs\\Python\\Python39\\lib\\logging\\__init__.py',
-   'PYMODULE'),
   ('facade',
    'C:\\Users\\ssmlnsk\\PycharmProjects\\Stack\\facade.py',
    'PYMODULE'),
@@ -803,4 +800,7 @@
    'PYMODULE'),
   ('PyQt5',
    'C:\\Users\\ssmlnsk\\AppData\\Local\\Programs\\Python\\Python39\\lib\\site-packages\\PyQt5\\__init__.py',
+   'PYMODULE'),
+  ('logging',
+   'C:\\Users\\ssmlnsk\\AppData\\Local\\Programs\\Python\\Python39\\lib\\logging\\__init__.py',
    'PYMODULE')])

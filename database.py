@@ -1,10 +1,12 @@
 from sqlite3 import connect
 import json
 
-class Database():
+
+class Database:
     """
     Класс с функциями для взаимодействия с базой данных.
     """
+
     def __init__(self, name):
         """
         Создание базы данных.
@@ -16,7 +18,7 @@ class Database():
         self.conn.commit()
         cursor.close()
 
-    def Insert_in_Table(self, data):
+    def insert(self, data):
         """
         Функция для вставки данных в базу данных.
         :param data: данные, которые вставляются в базу данных
@@ -29,7 +31,7 @@ class Database():
         self.conn.commit()
         cursor.close()
 
-    def get_lastVersion(self):
+    def get_last_version(self):
         """
         Функция получения последней версии стека.
         :return: None
@@ -74,6 +76,6 @@ class Database():
         cursor = self.conn.cursor()
         cursor.execute("DELETE FROM versions")
         cursor.execute("DELETE FROM sqlite_sequence WHERE name = 'versions'")
-        cursor.execute("UPDATE sqlite_sequence SET seq = 10 WHERE name = 'versions'")
+        cursor.execute("UPDATE sqlite_sequence SET seq = 0 WHERE name = 'versions'")
         self.conn.commit()
         cursor.close()

@@ -1,6 +1,7 @@
 from database import Database
 from stack import Stack
 
+
 class Facade:
     """
     Класс фасада
@@ -13,11 +14,11 @@ class Facade:
         self.DB = Database(name)
 
         list = []
-        if self.DB.get_lastVersion() != None:
-            if self.DB.get_lastVersion() == 'None':
+        if self.DB.get_last_version() is not None:
+            if self.DB.get_last_version() == 'None':
                 list = []
             else:
-                nums = self.DB.get_lastVersion()[0][1:-1].split(',')
+                nums = self.DB.get_last_version()[0][1:-1].split(',')
                 if nums != ['']:
                     for num in nums:
                         list.append(int(num))
@@ -30,7 +31,7 @@ class Facade:
         :return: None
         """
         data = self.S.get_json_data()
-        self.DB.Insert_in_Table(data)
+        self.DB.insert(data)
         self.S.version.clear()
 
     def push(self, current, data):
@@ -58,12 +59,11 @@ class Facade:
         :return: None
         """
         version = []
-        if self.DB.get_lastVersion() != None:
-            nums = self.DB.get_lastVersion()[0][1:-1].split(',')
+        if self.DB.get_last_version() is not None:
+            nums = self.DB.get_last_version()[0][1:-1].split(',')
             if nums != ['']:
                 for num in nums:
                     version.append(int(num))
-        # print('vers', version)
         return version
 
     def get_id(self):
@@ -81,7 +81,7 @@ class Facade:
         :return: None
         """
         select = []
-        if self.DB.select(id) != None:
+        if self.DB.select(id) is not None:
             nums = self.DB.select(id)[0][1:-1].split(',')
             if nums != ['']:
                 for num in nums:
